@@ -38,7 +38,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 const downloadUrl = window.URL.createObjectURL(blob);
                 const a = document.createElement("a");
                 a.href = downloadUrl;
-                a.download = "archivo_comprimido.pdf"; // o como quieras llamarlo
+
+                //mantener el nombre original del archivo
+                const fileInput = form.querySelector("input[type='file']");
+                const originalFileName = fileInput.files[0].name;
+                const extension = originalFileName.split('.').pop();
+                const baseName = originalFileName.replace(/\.[^/.]+$/, "");
+                // const newFileName = baseName + "_comprimido." + extension;
+                const newFileName = baseName + "_copia";                
+
+
+
+                a.download = newFileName; // o como quieras llamarlo
                 document.body.appendChild(a);
                 a.click();
                 a.remove();
